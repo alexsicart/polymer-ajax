@@ -1,0 +1,6 @@
+{
+  "name": "polymer-livecoding",
+  "short_name": "polymer-livecoding",
+  "start_url": "/",
+  "display": "standalone"
+}

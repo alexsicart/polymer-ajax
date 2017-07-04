@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="polymer-livecoding-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PolymerLivecodingApp extends Polymer.Element {
+      static get is() { return 'polymer-livecoding-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'polymer-livecoding-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PolymerLivecodingApp.is, PolymerLivecodingApp);
+  </script>
+</dom-module>
