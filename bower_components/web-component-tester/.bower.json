@@ -47,7 +47,7 @@
     "tag": "v6.0.0",
     "commit": "1ddc0535aa436849e9653df6d4f9d93a6dc6d398"
   },
-  "_source": "https://github.com/Polymer/web-component-tester.git",
+  "_source": "git://github.com/Polymer/web-component-tester.git",
   "_target": "^6.0.0",
   "_originalSource": "Polymer/web-component-tester"
 }

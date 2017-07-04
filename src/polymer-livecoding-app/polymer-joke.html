@@ -1,0 +1,35 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="polymer-joke">
+  <template>
+    <style>
+      :host {
+      }
+      div {
+        background-color: #BBB;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+
+    <div class="">
+      <p>[[joke.joke]]</p>
+      <small>[[joke.categories]]</small>
+    </div>
+  </template>
+
+  <script>
+    class PolymerJoke extends Polymer.Element {
+      static get is() { return 'polymer-joke' }
+      static get properties() {
+        return {
+          joke: {
+            type: Object,
+          }
+        }
+      }
+    }
+
+    window.customElements.define(PolymerJoke.is, PolymerJoke);
+  </script>
+</dom-module>

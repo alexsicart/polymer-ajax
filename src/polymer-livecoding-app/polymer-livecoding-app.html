@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="./polymer-joke.html">
 
 <dom-module id="polymer-livecoding-app">
   <template>
@@ -7,18 +9,12 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
-    <p>[[heroJoke.joke]]</p>
-
-    <!-- <iron-ajax
-    auto
-    url="https://api.icndb.com/jokes/random"
-    handle-as="json"
-    last-response="{{joke}}"
-    on-response="handleResponse"
-    debounce-duration="300"></iron-ajax>
-
-  </template> -->
+    <h2>[[heroJoke.joke]]</h2>
+    <p> ======= </p>
+    <template is="dom-repeat" items="[[jokes]]">
+      <polymer-joke joke="[[item]]"></polymer-joke>
+    </template>
+  </template>
 
   <script>
     /**
@@ -35,26 +31,38 @@
           },
           heroJoke: {
             type: Object
+          },
+          jokes: {
+            type: Array,
           }
         };
       }
-    ready() {
-      super.ready();
 
-      .fetch('https://api.icndb.com/jokes/random/14')
-      .then(data => data.json())
-      .then(data => data.json())
-      .then(data => {
-        this.heroJoke = data.value
-      });
-      catch(err => console.error(err));
+      ready () {
+        super.ready();
+        this.downloadHeroJoke()
+        this.downloadOtherJokes()
+
+      }
+
+      downloadHeroJoke () {
+        fetch('http://api.icndb.com/jokes/random/')
+        .then(data => data.json())
+        .then(data => {
+          this.heroJoke = data.value
+        })
+        .catch(err => console.error(err));
+      }
+
+      downloadOtherJokes() {
+        fetch('http://api.icndb.com/jokes/random/14')
+        .then(data => data.json())
+        .then(data => {
+          this.jokes = data.value
+        })
+        .catch(err => console.error(err));
+      }
     }
-  }
-
-    //   handleResponse(event, request) {
-    //     this.joke = event.detail.response.value;
-    //   }
-    // }
 
     window.customElements.define(PolymerLivecodingApp.is, PolymerLivecodingApp);
   </script>
