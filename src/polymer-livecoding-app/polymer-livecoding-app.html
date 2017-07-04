@@ -1,5 +1,4 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="polymer-livecoding-app">
   <template>
@@ -9,16 +8,17 @@
       }
     </style>
     <h2>Hello [[prop1]]!</h2>
-    <p>[[joke]]</p>
+    <p>[[heroJoke.joke]]</p>
 
-    <iron-ajax
+    <!-- <iron-ajax
     auto
     url="https://api.icndb.com/jokes/random"
     handle-as="json"
-    last-response="joke"
+    last-response="{{joke}}"
+    on-response="handleResponse"
     debounce-duration="300"></iron-ajax>
 
-  </template>
+  </template> -->
 
   <script>
     /**
@@ -32,10 +32,29 @@
           prop1: {
             type: String,
             value: 'polymer-livecoding-app'
+          },
+          heroJoke: {
+            type: Object
           }
         };
       }
+    ready() {
+      super.ready();
+
+      .fetch('https://api.icndb.com/jokes/random/14')
+      .then(data => data.json())
+      .then(data => data.json())
+      .then(data => {
+        this.heroJoke = data.value
+      });
+      catch(err => console.error(err));
     }
+  }
+
+    //   handleResponse(event, request) {
+    //     this.joke = event.detail.response.value;
+    //   }
+    // }
 
     window.customElements.define(PolymerLivecodingApp.is, PolymerLivecodingApp);
   </script>
