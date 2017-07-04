@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="polymer-livecoding-app">
   <template>
@@ -8,6 +9,14 @@
       }
     </style>
     <h2>Hello [[prop1]]!</h2>
+
+    <iron-ajax
+    auto
+    url="https://api.icndb.com/jokes/random"
+    handle-as="json"
+    on-response="handleResponse"
+    debounce-duration="300"></iron-ajax>
+
   </template>
 
   <script>
